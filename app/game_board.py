@@ -5,39 +5,33 @@ class GameBoard:
 
     def __init__(self, items=()):
         self._l = items
-        self._background = pygame.image.load("../assets/grass.png")
+        self._game_title = "Snake"
         self._board = pygame.display.set_mode((800, 600))
-        self._font = pygame.font.SysFont("freesansbold.ttf", 32)
+        self._snake_icon = pygame.image.load("../assets/serpent.png")
+        self._background = pygame.image.load("../assets/grass.png")
         self._game_over_font = pygame.font.SysFont("freesansbold.ttf", 70)
-        self._score_value = 0
+        self._font = pygame.font.SysFont("freesansbold.ttf", 32)
         self._clock = pygame.time.Clock()
+        self._score_value = 0
+        self._game_over_x = 10
+        self._game_over_y = 10
 
-    def show_score(self):
-        text_X = 10
-        text_Y = 10
-        score = self._font.render("Score: {}".format(self._score_value), True, (255, 255, 255))
-        self.blit(score, text_X, text_Y)
+    def display_game_title(self):
+        pygame.display.set_caption(self._game_title)
 
-    def game_over_info(self):
-        game_over_text = self._game_over_font.render("GAME OVER", True, (255, 255, 255))
-        self.blit(game_over_text, 250, 250)
+    def display_game_icon(self):
+        pygame.display.set_icon(self._snake_icon)
 
-    def fill(self):
-        self._board.fill((0, 0, 0))
+    def blit(self, image, x, y):
+        self._board.blit(image, (x, y))
 
-    def blit_background(self):
-        self.blit(self._background, 0, 0)
+    def draw_background(self):
+        self._board.blit(self._background, (0, 0))
 
-    def score_up(self):
-        self._score_value = self._score_value + 1
+    def rise_score(self):
+        self._score_value += 1
 
-    def clock(self, tick):
-        return self._clock.tick(tick)
-
-    def get_board(self):
-        return self._board
-
-    def game_over(self):
+    def show_game_over(self):
         pause = True
 
         while pause:
@@ -46,11 +40,24 @@ class GameBoard:
                     pygame.quit()
                     quit()
 
-            self.fill()
+            self.fill_color()
             self.show_score()
-            self.game_over_info()
+            self._show_game_over_text()
             pygame.display.update()
 
-    def blit(self, image, x, y):
-        self._board.blit(image, (x, y))
+    def fill_color(self):
+        self._board.fill((0, 0, 0))
 
+    def show_score(self):
+        score = self._font.render("Score: {}".format(self._score_value), True, (255, 255, 255))
+        self.blit(score, self._game_over_x, self._game_over_y)
+
+    def _show_game_over_text(self):
+        game_over_text = self._game_over_font.render("GAME OVER", True, (255, 255, 255))
+        self.blit(game_over_text, 250, 250)
+
+    def get_board(self):
+        return self._board
+
+    def get_clock(self, tick):
+        return self._clock.tick(tick)
