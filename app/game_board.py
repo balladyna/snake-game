@@ -64,5 +64,5 @@ class GameBoard:
     def get_board(self):
         return self._board
 
-    def get_clock(self, tick):
-        return self._clock.tick(tick)
+    def set_clock(self, tick):
+        self._clock.tick(tick)
