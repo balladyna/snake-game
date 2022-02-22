@@ -25,6 +25,9 @@ class GameBoard:
     def blit(self, image, x, y):
         self._board.blit(image, (x, y))
 
+    def blit_2(self, image, image_rect):
+        self._board.blit(image, image_rect)
+
     def draw_background(self):
         self._board.blit(self._background, (0, 0))
 
