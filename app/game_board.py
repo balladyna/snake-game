@@ -6,9 +6,9 @@ class GameBoard:
     def __init__(self, items=()):
         self._l = items
         self._game_title = "Snake"
-        self._board = pygame.display.set_mode((800, 600))
+        self._board = pygame.display.set_mode((800, 800))
         self._snake_icon = pygame.image.load("../assets/serpent.png")
-        self._background = pygame.image.load("../assets/grass.png")
+        self._background = pygame.image.load("../assets/brick.png")
         self._game_over_font = pygame.font.SysFont("freesansbold.ttf", 70)
         self._font = pygame.font.SysFont("freesansbold.ttf", 32)
         self._clock = pygame.time.Clock()
