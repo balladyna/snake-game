@@ -27,18 +27,15 @@ while running:
     game_board.show_score()
 
     # draw snake head and tail
-    snake_head.draw_tail(game_board.get_board(), snake_tail.get_snake_tail())
+    snake_head.draw_snake(game_board.get_board(), snake_tail.get_snake_tail())
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == screen_update:
-            snake_tail.move_tail()
-            snake_tail.check_last_direction(key_pressed)
+            snake_tail.move_snake()
+            snake_tail.change_direction(key_pressed)
 
-
-    # if snake_head.is_end_x(snake_head.get_snake_head_rect()) or snake_head.is_end_y(snake_head.get_snake_head_rect()):
-    #     game_board.show_game_over()
     pygame.display.update()
     game_board.get_clock(90)
 

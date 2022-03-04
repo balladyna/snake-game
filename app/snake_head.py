@@ -30,16 +30,16 @@ class SnakeHead:
         else:
             return False
 
-    def draw_tail(self, screen, list):
+    def draw_snake(self, screen, list):
         self.turn_head_graphics(list)
         for index, rect in enumerate(list):
-            x_position = int(rect.x * 25)
-            y_position = int(rect.y * 25)
-            rect_rec = pygame.Rect(x_position, y_position, 25, 25)
+            x_position = int(rect.x * 20)
+            y_position = int(rect.y * 20)
+            snake_segment_rect = pygame.Rect(x_position, y_position, 20, 20)
             if index == 0:
-                screen.blit(self._snake_head_img, rect_rec)
+                screen.blit(self._snake_head_img, snake_segment_rect)
             else:
-                pygame.draw.rect(screen, (183, 111, 122), rect_rec)
+                pygame.draw.rect(screen, (183, 111, 122), snake_segment_rect)
 
     def turn_head_graphics(self, list):
         head = list[1] - list[0]

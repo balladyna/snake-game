@@ -6,7 +6,9 @@ class GameBoard:
     def __init__(self, items=()):
         self._l = items
         self._game_title = "Snake"
-        self._board = pygame.display.set_mode((800, 800))
+        self._size_of_square = 20
+        self._number_of_squares = 40
+        self._board = pygame.display.set_mode((self._number_of_squares * self._size_of_square, self._number_of_squares * self._size_of_square))
         self._snake_icon = pygame.image.load("../assets/serpent.png")
         self._background = pygame.image.load("../assets/brick.png")
         self._game_over_font = pygame.font.SysFont("freesansbold.ttf", 70)
@@ -25,7 +27,7 @@ class GameBoard:
     def blit(self, image, x, y):
         self._board.blit(image, (x, y))
 
-    def blit_2(self, image, image_rect):
+    def blit_rect(self, image, image_rect):
         self._board.blit(image, image_rect)
 
     def draw_background(self):
@@ -45,7 +47,7 @@ class GameBoard:
 
             self.fill_color()
             self.show_score()
-            self._show_game_over_text()
+            self.show_game_over_text()
             pygame.display.update()
 
     def fill_color(self):
@@ -55,7 +57,7 @@ class GameBoard:
         score = self._font.render("Score: {}".format(self._score_value), True, (255, 255, 255))
         self.blit(score, self._game_over_x, self._game_over_y)
 
-    def _show_game_over_text(self):
+    def show_game_over_text(self):
         game_over_text = self._game_over_font.render("GAME OVER", True, (255, 255, 255))
         self.blit(game_over_text, 250, 250)
 
