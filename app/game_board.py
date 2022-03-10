@@ -1,4 +1,5 @@
 import pygame
+from pygame import mixer
 
 
 class GameBoard:
@@ -11,9 +12,10 @@ class GameBoard:
         self._board = pygame.display.set_mode(
             (self._number_of_squares * self._size_of_square, self._number_of_squares * self._size_of_square))
         self._snake_icon = pygame.image.load("../assets/snake_icon.png")
-        self._background = pygame.image.load("../assets/background_img.png")
+        self._background = pygame.image.load("../assets/background.png")
         self._game_over_font = pygame.font.SysFont("freesansbold.ttf", 70)
         self._font = pygame.font.SysFont("freesansbold.ttf", 32)
+        self._snake_hiss = "../assets/snake_hiss.wav"
         self._score_value = 0
         self._game_over_x = 10
         self._game_over_y = 10
@@ -36,8 +38,16 @@ class GameBoard:
         game_over_text = self._game_over_font.render("GAME OVER", True, (255, 255, 255))
         self._board.blit(game_over_text, (250, 250))
 
+    def show_win_game_text(self):
+        game_over_text = self._game_over_font.render("YOU WIN!", True, (255, 255, 255))
+        self._board.blit(game_over_text, (250, 250))
+
     def rise_score(self):
         self._score_value += 1
+
+    def hiss_sound(self):
+        hiss_sound = mixer.Sound(self._snake_hiss)
+        hiss_sound.play()
 
     def show_game_over(self):
         pause = True
@@ -52,6 +62,23 @@ class GameBoard:
             self.show_score()
             self.show_game_over_text()
             pygame.display.update()
+
+    def show_win_game(self):
+        if self._score_value == 1597:
+            self._score_value = self._score_value + 10003
+
+            pause = True
+
+            while pause:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        quit()
+
+                self.fill_color()
+                self.show_score()
+                self.show_win_game_text()
+                pygame.display.update()
 
     def fill_color(self):
         self._board.fill((0, 0, 0))

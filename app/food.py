@@ -10,7 +10,7 @@ class Food:
         self._food_position = Vector2(0, 0)
         self._randomize_position()
         self._food_rect = pygame.Rect(self._food_position.x * 20, self._food_position.y * 20, 20, 20)
-        self._food_image = pygame.image.load("../assets/food_img.png").convert_alpha()
+        self._food_image = pygame.image.load("../assets/food.png").convert_alpha()
 
     def check_food_position(self, snake_position):
         checking = True

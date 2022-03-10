@@ -15,7 +15,7 @@ class Snake:
         self._snake_direction = Vector2(-1, 0)
         self._last_direction = "left"
         self._head_rect = pygame.Rect(self._head_position.x * 20, self._head_position.y * 20, 20, 20)
-        self._snake_head_img = pygame.image.load("../assets/head_img.png").convert_alpha()
+        self._snake_head_img = pygame.image.load("../assets/head.png").convert_alpha()
 
     def draw(self, board):
         for index, rect in enumerate(self._snake_position):
@@ -23,11 +23,7 @@ class Snake:
             y_position = int(rect.y * 20)
             snake_segment_rect = pygame.Rect(x_position, y_position, 20, 20)
             if index != 0:
-                pygame.draw.rect(board, (0, 90, 0), snake_segment_rect)
-            # elif snake_segment_rect.right >= 750 or snake_segment_rect.left <= 50:
-            #     self.pause()
-            # elif snake_segment_rect.top >= 750 or snake_segment_rect.bottom <= 50:
-            #     self.pause()
+                pygame.draw.rect(board, (147, 229, 72), snake_segment_rect)
             else:
                 self._head_rect = pygame.Rect(x_position, y_position, 20, 20)
                 board.blit(self._snake_head_img, self._head_rect)
@@ -73,3 +69,12 @@ class Snake:
 
     def is_food_collision(self, food_rect):
         return self._head_rect.colliderect(food_rect)
+
+    def is_border_collision(self):
+        is_hit_left = self._head_rect.left < 0
+        is_hit_right = self._head_rect.right > 800
+        is_hit_top = self._head_rect.top < 0
+        is_hit_bottom = self._head_rect.bottom > 800
+
+        if is_hit_left or is_hit_right or is_hit_top or is_hit_bottom:
+            return True

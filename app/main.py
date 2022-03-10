@@ -3,11 +3,13 @@ import game_board
 import snake
 import food
 
+
 pygame.init()
 
 game_board = game_board.GameBoard()
 snake = snake.Snake()
 food = food.Food()
+
 
 game_board.display_game_title()
 game_board.display_game_icon()
@@ -43,12 +45,14 @@ while running:
                 snake.set_direction_down()
 
     if snake.is_food_collision(food.get_food_rect()):
+        game_board.hiss_sound()
         snake.add_new_segment()
         food.check_food_position(snake.get_snake_position())
         game_board.rise_score()
 
-    if snake.is_snake_tail_collision():
+    if snake.is_snake_tail_collision() or snake.is_border_collision():
         game_board.show_game_over()
 
+    game_board.show_win_game()
     game_board.show_score()
     pygame.display.update()
