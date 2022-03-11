@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 from pygame import mixer
 
 
@@ -56,7 +56,8 @@ class GameBoard:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    pause = True
+                    sys.exit()
 
             self.fill_color()
             self.show_score()

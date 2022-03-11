@@ -14,7 +14,7 @@ food = food.Food()
 game_board.display_game_title()
 game_board.display_game_icon()
 
-pygame.time.set_timer(pygame.USEREVENT, 150)
+pygame.time.set_timer(pygame.USEREVENT, 100)
 
 game_board.set_clock(90)
 

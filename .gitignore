@@ -1,6 +1,11 @@
 # Ignore .idea directory, these are IntelliJ IDEA config files
 .idea
 
+# Ignore release files
+
+snake_icon.ico
+Snake Game.exe
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
